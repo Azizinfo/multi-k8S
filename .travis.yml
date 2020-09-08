@@ -1,5 +1,5 @@
-language: generic
 sudo: required
+language: generic
 
 services:
   - docker
@@ -8,9 +8,9 @@ befor_install:
   - docker build -t aziz24/react-tests -f ./client/Dockerfile.dev ./client
 
 scripts:
-  - docker run -e CI=true aziz24/react-tests npm run test
+  - docker run -e CI=true aziz24/react-tests npm test
 
-after_succes:
+after_success:
   - docker build -t aziz24/multi-client ./client  
   - docker build -t aziz24/multi-nginx ./nginx  
   - docker build -t aziz24/multi-server ./server 
