@@ -18,7 +18,7 @@ after_success:
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push aziz24/multi-client:latest
-  - docker push aziz24/multi-nginx:latest
-  - docker push aziz24/multi-server:latest
-  - docker push aziz24/multi-worker:latest
+  - docker push aziz24/multi-client
+  - docker push aziz24/multi-nginx
+  - docker push aziz24/multi-server
+  - docker push aziz24/multi-worker
