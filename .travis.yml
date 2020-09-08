@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t aziz24/react-tests -f ./client/Dockerfile.dev ./client
+  - docker build -t aziz24/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true aziz24/react-tests npm test
+  - docker run -e CI=true aziz24/react-test npm test
 
 after_success:
-  - docker build -t aziz24/multi-client ./client
-  - docker build -t aziz24/multi-nginx ./nginx
-  - docker build -t aziz24/multi-server ./server
-  - docker build -t aziz24/multi-worker ./worker
+  - docker build -t aziz24/multi-client:latest ./client
+  - docker build -t aziz24/multi-nginx:latest ./nginx
+  - docker build -t aziz24/multi-server:latest ./server
+  - docker build -t aziz24/multi-worker:latest ./worker
   # Log in to the docker CLI
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push aziz24/multi-client
-  - docker push aziz24/multi-nginx
-  - docker push aziz24/multi-server
-  - docker push aziz24/multi-worker
+  - docker push aziz24/multi-client:latest
+  - docker push aziz24/multi-nginx:latest
+  - docker push aziz24/multi-server:latest
+  - docker push aziz24/multi-worker:latest
