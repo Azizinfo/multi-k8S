@@ -4,20 +4,20 @@ language: generic
 services:
   - docker
 
-befor_install:
-  - docker build -t aziz24/react-tests -f ./client/Dockerfile.dev ./client
+before_install:
+  - docker build -t aziz24/react-test -f ./client/Dockerfile.dev ./client
 
-scripts:
-  - docker run -e CI=true aziz24/react-tests npm test
+script:
+  - docker run -e CI=true aziz24/react-test npm test
 
 after_success:
-  - docker build -t aziz24/multi-client ./client  
-  - docker build -t aziz24/multi-nginx ./nginx  
-  - docker build -t aziz24/multi-server ./server 
-  - docker build -t aziz24/multi-worker ./worker 
-  # log into the docker cli
+  - docker build -t aziz24/multi-client ./client
+  - docker build -t aziz24/multi-nginx ./nginx
+  - docker build -t aziz24/multi-server ./server
+  - docker build -t aziz24/multi-worker ./worker
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # take those images and push them to docker hub
+  # Take those images and push them to docker hub
   - docker push aziz24/multi-client
   - docker push aziz24/multi-nginx
   - docker push aziz24/multi-server
