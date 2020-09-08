@@ -16,7 +16,7 @@ after_success:
   - docker build -t aziz24/multi-server ./server
   - docker build -t aziz24/multi-worker ./worker
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login index.docker.io -u "$DOCKER_ID" --password-stdin
+  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
   # Take those images and push them to docker hub
   - docker push aziz24/multi-client
   - docker push aziz24/multi-nginx
