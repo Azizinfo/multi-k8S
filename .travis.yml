@@ -22,3 +22,15 @@ after_success:
   - docker push aziz24/multi-nginx:latest
   - docker push aziz24/multi-server:latest
   - docker push aziz24/multi-worker:latest
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: eu-west-3
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-eu-west-3-883879838305
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY  

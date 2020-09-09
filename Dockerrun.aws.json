@@ -4,7 +4,33 @@
         {
             "name": "client",
             "image": "aziz24/multi-client",
-            "hostname": "client"
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "aziz24/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "aziz24/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "aziz24/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }    
+            ],
+            "links": ["client", "server"]        
         }
     ]
 }
